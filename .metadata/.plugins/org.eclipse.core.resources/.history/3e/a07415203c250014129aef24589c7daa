@@ -1,0 +1,13 @@
+import java.io.*;
+import java.util.*;
+import java.lang.*;
+
+public class Graph {
+	private int V;
+	private int E;
+	private boolean[][] mat;
+	private LinkedList<Integer>[] adj;
+	public Graph(int V){
+		
+	}
+}
