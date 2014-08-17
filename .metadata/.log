@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 !SESSION 2014-08-17 11:37:46.249 -----------------------------------------------
+=======
+!SESSION 2014-08-15 14:01:16.415 -----------------------------------------------
+>>>>>>> f26a382693b922ff6c1a494367e93e2d13c6dfde
 eclipse.buildId=4.3.2.M20140221-1700
 java.version=1.8.0_05
 java.vendor=Oracle Corporation
@@ -6,7 +10,11 @@ BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
 Framework arguments:  -product org.eclipse.epp.package.standard.product
 Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.standard.product
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.egit.ui 2 0 2014-08-17 11:39:55.928
+=======
+!ENTRY org.eclipse.egit.ui 2 0 2014-08-15 14:05:18.671
+>>>>>>> f26a382693b922ff6c1a494367e93e2d13c6dfde
 !MESSAGE Warning: EGit couldn't detect the installation path "gitPrefix" of native Git. Hence EGit can't respect system level
 Git settings which might be configured in ${gitPrefix}/etc/gitconfig under the native Git installation directory.
 The most important of these settings is core.autocrlf. Git for Windows by default sets this parameter to true in
@@ -14,7 +22,33 @@ this system level configuration. The Git installation location can be configured
 Team > Git > Configuration preference page's 'System Settings' tab.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.egit.ui 2 0 2014-08-17 11:39:55.939
+=======
+!ENTRY org.eclipse.egit.ui 2 0 2014-08-15 14:05:18.750
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Manohar'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2014-08-16 03:56:07.782 -----------------------------------------------
+eclipse.buildId=4.3.2.M20140221-1700
+java.version=1.8.0_05
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.standard.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.standard.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2014-08-16 03:57:12.353
+!MESSAGE Warning: EGit couldn't detect the installation path "gitPrefix" of native Git. Hence EGit can't respect system level
+Git settings which might be configured in ${gitPrefix}/etc/gitconfig under the native Git installation directory.
+The most important of these settings is core.autocrlf. Git for Windows by default sets this parameter to true in
+this system level configuration. The Git installation location can be configured on the
+Team > Git > Configuration preference page's 'System Settings' tab.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.egit.ui 2 0 2014-08-16 03:57:12.384
+>>>>>>> f26a382693b922ff6c1a494367e93e2d13c6dfde
 !MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
 user global configuration and to define the default location to store repositories: 'C:\Users\Manohar'. If this is
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and

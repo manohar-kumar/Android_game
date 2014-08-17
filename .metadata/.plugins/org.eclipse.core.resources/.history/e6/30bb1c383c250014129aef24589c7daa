@@ -1,0 +1,39 @@
+import java.io.*;
+import java.util.*;
+import java.lang.*;
+
+import javax.management.RuntimeErrorException;
+
+public class Graph {
+	private int V;
+	private int E;
+	private boolean[][] mat;
+	private LinkedList<Integer>[] adj;
+	public Graph(int V){
+		if (V<0) throw new RuntimeException("Number of vertices must be non-negative");
+		this.V=V;
+		this.E=0;
+		this.mat=new boolean[V][V];
+		adj = (LinkedList<Integer>[]) new LinkedList[V];
+		for (int v=0;v<V;v++){
+			adj[v]=new LinkedList<Integer>();
+			}
+		}
+	public void addEdge(int u,int v){
+		if (u < 0 || v >= V) throw new IndexOutOfBoundsException();
+        if (u < 0 || v >= V) throw new IndexOutOfBoundsException();
+        if (!mat[u][v]){
+        E++;
+        adj[u].add(v);
+        adj[v].add(u);
+        mat[u][v]=true;
+        mat[v][u]=true;
+        }
+       }
+	public int V(){
+		return V;
+	}
+	public int E(){
+		return E;
+		}
+	

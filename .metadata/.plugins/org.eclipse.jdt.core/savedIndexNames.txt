@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 INDEX VERSION 1.126+C:\Users\Manohar\Documents\new_proj\Android_game\.metadata\.plugins\org.eclipse.jdt.core
 3926188048.index
 2010491873.index
@@ -19,3 +20,7 @@ INDEX VERSION 1.126+C:\Users\Manohar\Documents\new_proj\Android_game\.metadata\.
 1244022644.index
 648820999.index
 3829748403.index
+=======
+INDEX VERSION 1.126+C:\Users\Manohar\Documents\javadoc\new_proj\.metadata\.plugins\org.eclipse.jdt.core
+2685375346.index
+>>>>>>> f26a382693b922ff6c1a494367e93e2d13c6dfde
