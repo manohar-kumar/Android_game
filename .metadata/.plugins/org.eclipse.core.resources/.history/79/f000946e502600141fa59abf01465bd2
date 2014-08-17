@@ -63,8 +63,6 @@ public class Graph {
 	public void addEdgeB(int u,int v){
 		if (u < 0 || v >= V) throw new IndexOutOfBoundsException();
         if (u < 0 || v >= V) throw new IndexOutOfBoundsException();
-        if (dangerous_b[u][v]) 
-        	throw new IndexOutOfBoundsException("triangle formed");
         if (mat_a[u][v]||mat_b[u][v]) 
         	throw new IndexOutOfBoundsException("edge already present");
         else {
