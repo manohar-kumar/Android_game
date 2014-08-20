@@ -5,8 +5,15 @@ public class Pair<L,R> {
         this.l = l;
         this.r = r;
     }
-    public L getL(){ return l; }
+    public Pair() {
+		
+	}
+	public L getL(){ return l; }
     public R getR(){ return r; }
     public void setL(L l){ this.l = l; }
     public void setR(R r){ this.r = r; }
+    public void print(){
+    	System.out.println(""+this.l+" "+this.r+"\n");
+    
+    }
 }
