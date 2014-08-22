@@ -310,7 +310,7 @@ public Pair<Integer,Integer> SecondB(){
 			v=valid.get(i).getR();
 			if (!dangerous_a[u][v]){                             
 				temp_index.add(i);
-		}
+		A	}
 		}
 		if (temp_index.isEmpty()) {
 			for (int j=0;j<valid.size();j++) temp_index.add(j);
