@@ -27,6 +27,28 @@ public class Graph {
 			adj_b[v]=new LinkedList<Integer>();
 			}
 		}
+	public void printMatA(){
+		for (int i=0;i<V;i++){
+			for (int j=0;j<V;j++){
+				System.out.println(mat_a[i][j]+" ");
+			}
+			System.out.println("\n");
+		}
+	}
+	public void printMatB(){
+		for (int i=0;i<V;i++){
+			for (int j=0;j<V;j++){
+				System.out.println(mat_b[i][j]);
+			}
+			System.out.println("\n");
+		}
+	}
+	public void printLinked(LinkedList<Pair<Integer,Integer>> p){
+		for (int i=0;i<p.size();i++){
+			System.out.println(p.get(i).getL()+" "+p.get(i).getR());
+		}
+	}
+	
 	
 	public LinkedList<Pair<Integer, Integer>> validEdges(){
 		LinkedList<Pair<Integer, Integer>> q=new LinkedList<Pair<Integer,Integer>>();
@@ -123,13 +145,19 @@ public Pair<Integer,Integer> SecondB(){
 	
 	
 	public Pair<Integer,Integer> Amove(){
+		if (this.E==0) return this.FirstA();
+		Pair<Integer,Integer> ret=new Pair<Integer, Integer>();// for returning values
 		LinkedList<Pair<Integer, Integer>> valid=new LinkedList<Pair<Integer,Integer>>();
 		valid=this.validEdges();
 		LinkedList<Integer> temp_index=new LinkedList<Integer>();
 		LinkedList<Integer> temp_index_two=new LinkedList<Integer>();
-		int[] count=new int[valid.size()];
-		for (int i=0;i<count.length;i++) count[i]=0;
-		if (valid.size()==1) return valid.get(0);
+		
+	
+		if (valid.size()==1) {
+			ret=valid.get(0);
+			this.addEdgeA(ret.getL(), ret.getR());
+			return ret;
+		}
 		int u,v;
 		
 		//ruin a safe move
@@ -143,27 +171,41 @@ public Pair<Integer,Integer> SecondB(){
 		if (temp_index.isEmpty()) {
 			for (int j=0;j<valid.size();j++) temp_index.add(j);
 		}
-		if (temp_index.size()==1) return valid.get(temp_index.get(0));
+		if (temp_index.size()==1) {
+			ret=valid.get(temp_index.get(0));
+			this.addEdgeA(ret.getL(), ret.getR());
+			return ret;
+		}
 		
 		//creating a loser
+		
+		int[] count=new int[temp_index.size()];//count parameters for all edges
+		for (int i=0;i<count.length;i++) count[i]=0;
 		
 		for (int j=0;j<temp_index.size();j++){
 			u=valid.get(temp_index.get(j)).getL();
 			v=valid.get(temp_index.get(j)).getR();
-			for (int k=0;k<V&&k!=u&&k!=v;k++){
-				if ((mat_a[u][k]&&!mat_a[v][k]&&!mat_b[v][k])||(!mat_a[u][k]&&!mat_b[u][k]&&mat_a[v][k])){
-					count[j]++;
+			for (int k=0;k<V;k++){
+				if (k==u||k==v) continue;
+				if ((mat_a[u][k]&&!mat_a[v][k]&&!mat_b[v][k])||
+						(!mat_a[u][k]&&!mat_b[u][k]&&mat_a[v][k])){
+					count[j]++; 
 				}
 			}
 		}
 		int max_count=min(count);
-		for (int i=0;i<count.length;i++){
-			if (count[i]==max_count) temp_index_two.add(i);
+		for (int i=0;i<temp_index.size();i++){
+			if (count[i]==max_count) temp_index_two.add(temp_index.get(i));
+		}
+		
+		
+		if (temp_index_two.size()==1){
+			ret=valid.get(temp_index_two.get(0));
+			this.addEdgeA(ret.getL(), ret.getR());
+			return ret;
 		}
 		temp_index.clear();
-		if (temp_index_two.size()==0) 
-			temp_index_two=(LinkedList<Integer>) temp_index.clone();
-		if (temp_index_two.size()==1) return valid.get(temp_index_two.get(0));
+		count=new int[temp_index_two.size()];
 		for (int i=0;i<count.length;i++) count[i]=0;
 		
 		//complete mixed triangle
@@ -171,42 +213,59 @@ public Pair<Integer,Integer> SecondB(){
 		for (int j=0;j<temp_index_two.size();j++){
 			u=valid.get(temp_index_two.get(j)).getL();
 			v=valid.get(temp_index_two.get(j)).getR();
-			for (int k=0;k<V&&k!=u&&k!=v;k++){
+			for (int k=0;k<V;k++){
+				if (k==u||k==v) continue;
 				if ((mat_a[u][k]&&mat_b[v][k])||(mat_b[u][k]&&mat_a[v][k])){
 					count[j]++;
 				}
 			}
 		}
 		 max_count=max(count);
-		for (int i=0;i<count.length;i++){
-			if (count[i]==max_count) temp_index.add(i);
+		for (int i=0;i<temp_index_two.size();i++){
+			if (count[i]==max_count) temp_index.add(temp_index_two.get(i));
 		}
-		temp_index_two.clear();
-		if (temp_index.size()==1) return valid.get(temp_index.get(0));
-		if (temp_index.size()==0) 
-			temp_index=(LinkedList<Integer>) temp_index_two.clone();
+		
+		if (temp_index.size()==1) {
+			ret=valid.get(temp_index.get(0));
+			this.addEdgeA(ret.getL(), ret.getR());
+			return ret;
+		}
+		
+		
+		count=new int[temp_index.size()];
 		for (int i=0;i<count.length;i++) count[i]=0;
-		
+		temp_index_two.clear();
 		//create a partial mixed triangle
-		
 		for (int j=0;j<temp_index.size();j++){
 			u=valid.get(temp_index.get(j)).getL();
 			v=valid.get(temp_index.get(j)).getR();
-			for (int k=0;k<V&&k!=u&&k!=v;k++){
-				if ((!mat_a[u][k]&&!mat_a[v][k]&&mat_b[v][k])||(!mat_a[u][k]&&mat_b[u][k]&&!mat_a[v][k])){
+			for (int k=0;k<this.V;k++){
+				if (k==u||k==v) continue;
+				//System.out.println(mat_b[v][k]+" "+mat_b[u][k]);
+					
+				if ((!mat_a[u][k]&&!mat_a[v][k]&&mat_b[v][k]&&!mat_b[u][k]) || 
+						(!mat_a[u][k]&&!mat_a[v][k]&&!mat_b[v][k]&&mat_b[u][k])){
 					count[j]++;
 				}
 			}
 		}
 		 max_count=max(count);
+
 		 temp_index_two.clear();
-		for (int i=0;i<count.length;i++){
-			if (count[i]==max_count) temp_index_two.add(i);
+		for (int i=0;i<temp_index.size();i++){
+			if (count[i]==max_count) temp_index_two.add(temp_index.get(i));
 		}
-		if (temp_index_two.size()==1) return valid.get(temp_index_two.get(0));
+		if (temp_index_two.size()==1) {
+			ret=valid.get(temp_index_two.get(0));
+			this.addEdgeA(ret.getL(), ret.getR());
+			return ret;
+		}
 		int rand=randInt(0, temp_index_two.size()-1);
 		
-		return valid.get(temp_index_two.get(rand));
+		ret=valid.get(temp_index_two.get(rand));
+		this.addEdgeA(ret.getL(), ret.getR());
+		return ret;
+		
 				
 		}
 	
@@ -214,6 +273,7 @@ public Pair<Integer,Integer> SecondB(){
 	
 	
 	public Pair<Integer,Integer> Bmove(){
+		if (this.E==1) return this.SecondB();
 		LinkedList<Pair<Integer, Integer>> valid=new LinkedList<Pair<Integer,Integer>>();
 		valid=this.validEdges();
 		LinkedList<Integer> temp_index=new LinkedList<Integer>();
@@ -329,7 +389,14 @@ public Pair<Integer,Integer> SecondB(){
 		p.print();
 		q=g.SecondB();
 		q.print();
-		p=g.Amove();
-		p.print();
+		
+		
+		for(int i=0;i<5;i++){
+			p=g.Amove();
+			p.print();
+			q=g.Bmove();
+			q.print();
+		}
+		
 	}
 }
